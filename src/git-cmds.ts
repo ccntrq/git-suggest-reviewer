@@ -1,4 +1,5 @@
 import {execSync} from 'child_process';
+import {GitCmdError} from './error';
 
 type SupportedGitCmd = 'diff' | 'blame';
 
@@ -22,7 +23,10 @@ export function gitDiff(baseRevision: string): string {
 function runGitCmd(cmd: SupportedGitCmd, opts: Array<string>): string {
   const fullCmd = ['git', cmd, ...opts].join(' ');
 
-  const result = execSync(fullCmd);
-
-  return result.toString();
+  try {
+    const result = execSync(fullCmd);
+    return result.toString();
+  } catch (error: unknown) {
+    throw new GitCmdError(`Couldn't execute git command: '${fullCmd}'`);
+  }
 }

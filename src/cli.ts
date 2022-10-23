@@ -1,4 +1,5 @@
 import {gitSuggestReviewer} from './core';
+import {GitCmdError} from './error';
 
 export function cli(): void {
   const opts = parseArgs(process.argv);
@@ -9,7 +10,7 @@ export function cli(): void {
     process.exit(1);
   }
 
-  const summary = gitSuggestReviewer(opts.baseRevision);
+  const summary = handleAppErrors(() => gitSuggestReviewer(opts.baseRevision));
 
   console.log(
     renderTable(summary.slice(0, 9), [
@@ -61,4 +62,33 @@ function renderTable<T extends object>(
         .join(' ');
     })
     .join('\n');
+}
+
+function handleAppErrors<T>(action: () => T): T {
+  try {
+    return action();
+  } catch (error: unknown) {
+    if (
+      error instanceof Error &&
+      error?.constructor.name === GitCmdError.name
+    ) {
+      console.error(error.message);
+    } else {
+      const msg = `
+An unexpected error occured. Please create a bug report by clicking the following link:
+  https://github.com/ccntrq/git-suggest-reviewer/issues/new?title=${encodeURIComponent(
+    'Unexpected error occured'
+  )}&body=`;
+
+      console.error(
+        msg +
+          encodeURIComponent(
+            error instanceof Error && error.stack ? error.stack : `${error}`
+          )
+      );
+    }
+
+    // eslint-disable-next-line no-process-exit
+    process.exit(2);
+  }
 }
