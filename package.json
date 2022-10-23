@@ -9,7 +9,7 @@
     "email": "ccntrq@screenri.de"
   },
   "scripts": {
-    "start": "npm run build && node build/src/index.js",
+    "start": "npm run build && node dist/index.js",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "clean": "gts clean",
