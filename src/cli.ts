@@ -1,5 +1,5 @@
 import {gitSuggestReviewer, ReviewerStats} from './core';
-import {GitCmdError} from './error';
+import {isGitCmdError, isUnexpectedError, UnexpectedError} from './errors';
 
 export function cli(): void {
   const opts = parseArgs(process.argv);
@@ -78,27 +78,20 @@ function handleAppErrors<T>(action: () => T): T {
   try {
     return action();
   } catch (error: unknown) {
-    if (
-      error instanceof Error &&
-      error?.constructor.name === GitCmdError.name
-    ) {
+    if (isGitCmdError(error)) {
       console.error(error.message);
-    } else {
-      const msg = `
-An unexpected error occured. Please create a bug report by clicking the following link:
-  https://github.com/ccntrq/git-suggest-reviewer/issues/new?title=${encodeURIComponent(
-    'Unexpected error occured'
-  )}&body=`;
-
-      console.error(
-        msg +
-          encodeURIComponent(
-            error instanceof Error && error.stack ? error.stack : `${error}`
-          )
-      );
+      // eslint-disable-next-line no-process-exit
+      process.exit(2);
     }
 
+    console.error(
+      'An unexpected error occured. Please create a bug report by clicking the\nfollowing link:\n' +
+        (isUnexpectedError(error)
+          ? error
+          : new UnexpectedError(error)
+        ).newIssueUrl()
+    );
     // eslint-disable-next-line no-process-exit
-    process.exit(2);
+    process.exit(3);
   }
 }

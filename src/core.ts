@@ -1,3 +1,4 @@
+import {GitCmdError, UnexpectedError} from './errors';
 import {gitDiff, gitBlame} from './git-cmds';
 import {lines} from './utils';
 
@@ -9,6 +10,23 @@ export interface ReviewerStats {
 }
 
 export function gitSuggestReviewer(baseRevision: string): Array<ReviewerStats> {
+  try {
+    return gitSuggestReviewerUnsafe(baseRevision);
+  } catch (error: unknown) {
+    if (
+      error instanceof Error &&
+      error?.constructor.name === GitCmdError.name
+    ) {
+      throw error;
+    } else {
+      throw new UnexpectedError(
+        error instanceof Error && error.stack ? error.stack : `${error}`
+      );
+    }
+  }
+}
+
+function gitSuggestReviewerUnsafe(baseRevision: string): Array<ReviewerStats> {
   const diff = gitDiff(baseRevision);
   const diffChanges = getDiffChanges(diff);
   const diffBlames = collectBlames(baseRevision, diffChanges);

@@ -1,5 +1,5 @@
 import {execSync} from 'child_process';
-import {GitCmdError} from './error';
+import {GitCmdError} from './errors';
 
 type SupportedGitCmd = 'diff' | 'blame';
 
