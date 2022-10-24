@@ -8,6 +8,7 @@
     "name": "Alexander Pankoff",
     "email": "ccntrq@screenri.de"
   },
+  "bugs": "https://github.com/ccntrq/git-suggest-reviewer/issues",
   "scripts": {
     "start": "npm run build && node dist/git-suggest-reviewer.js",
     "build": "tsc",
