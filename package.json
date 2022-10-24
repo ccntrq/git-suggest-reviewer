@@ -16,6 +16,7 @@
     "clean": "gts clean",
     "lint": "gts lint",
     "fix": "gts fix",
+    "doc": "typedoc src/index.ts",
     "prepublish": "npm run clean && npm run build"
   },
   "bin": "dist/git-suggest-reviewer.js",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@types/node": "^14.11.2",
     "gts": "^3.1.1",
+    "typedoc": "^0.23.18",
     "typescript": "~4.7.0"
   }
 }
