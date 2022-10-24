@@ -1,23 +1,52 @@
 import {gitSuggestReviewer, ReviewerStats} from './core';
 import {isGitCmdError, isUnexpectedError, UnexpectedError} from './errors';
+import {version} from './package';
 
 export function cli(): void {
   const opts = parseArgs(process.argv);
 
-  if (!opts) {
-    usage();
+  if (opts?.help) {
+    console.log(usage());
+    // eslint-disable-next-line no-process-exit
+    process.exit(0);
+  }
+
+  if (opts?.version) {
+    console.log(version);
+    // eslint-disable-next-line no-process-exit
+    process.exit(0);
+  }
+
+  if (!opts || !opts.baseRevision) {
+    console.error(usage());
     // eslint-disable-next-line no-process-exit
     process.exit(1);
   }
 
-  const topReviewers = handleAppErrors(() =>
-    gitSuggestReviewer(opts.baseRevision)
-  );
+  const baseRevision = opts.baseRevision;
+  const topReviewers = handleAppErrors(() => gitSuggestReviewer(baseRevision));
 
   console.log(renderTopReviewerTable(topReviewers.slice(0, 9)));
 
   // eslint-disable-next-line no-process-exit
   process.exit(0);
+}
+
+export function usage() {
+  const usage = `git-suggest-reviewers
+
+Suggest candidates for a code review based on git history.
+
+USAGE:
+  git-suggest-reviewers [OPTIONS]
+  git-suggest-reviewers base_revision
+
+Options:
+    -h --help       Show this help
+    -v --version    Print program version
+`;
+
+  return usage;
 }
 
 export function renderTopReviewerTable(
@@ -31,11 +60,16 @@ export function renderTopReviewerTable(
 }
 
 interface CliOptions {
-  baseRevision: string;
+  baseRevision?: string;
+  help: boolean;
+  version: boolean;
 }
 
-function usage() {
-  console.error('USAGE:\n  git-suggest-reviewers [baseRevision]');
+function defaultCliOptions(): CliOptions {
+  return {
+    help: false,
+    version: false,
+  };
 }
 
 function parseArgs(args: Array<string>): undefined | CliOptions {
@@ -43,9 +77,28 @@ function parseArgs(args: Array<string>): undefined | CliOptions {
     return undefined;
   }
 
-  return {
-    baseRevision: args[2],
-  };
+  const options = defaultCliOptions();
+  args.slice(2).forEach(arg => {
+    switch (arg) {
+      case '-h':
+      case '--help':
+        options.help = true;
+        break;
+      case '-v':
+      case '--version':
+        options.version = true;
+        break;
+      default:
+        if (!arg.startsWith('-') && !options.baseRevision) {
+          options.baseRevision = arg;
+        } else {
+          console.warn('Invalid argument: ' + arg);
+        }
+        break;
+    }
+  });
+
+  return options;
 }
 
 function renderTable<T extends object>(
