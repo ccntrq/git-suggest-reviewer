@@ -39,19 +39,25 @@ function parseArgs(args: Array<string>): undefined | CliOptions {
 }
 
 function renderTopReviewerTable(topReviewers: Array<ReviewerStats>): string {
-  return renderTable(topReviewers.slice(0, 9), [
-    'author',
-    'changedLines',
-    'lastCommitDate',
-  ]);
+  return renderTable(
+    topReviewers.slice(0, 9),
+    ['author', 'changedLines', 'lastCommitDate'],
+    ['Author', 'Changed Lines', 'Last Commit Date']
+  );
 }
 
 function renderTable<T extends object>(
   values: Array<T>,
-  headings: Array<keyof T>
+  accessors: Array<keyof T>,
+  headings?: Array<string>
 ): string {
-  const columns = headings.map(h => values.map(value => String(value[h])));
-  columns.forEach((c, i) => c.unshift(String(headings[i])));
+  if (headings && headings.length !== accessors.length) {
+    throw new Error('Headings and accessors must have same length.');
+  }
+  const columns = accessors.map(a => values.map(value => String(value[a])));
+  if (headings) {
+    columns.forEach((c, i) => c.unshift(String(headings[i])));
+  }
   const columnWidths: Array<number> = columns.map(column =>
     Math.max(...column.map(entry => entry.length))
   );
@@ -63,7 +69,7 @@ function renderTable<T extends object>(
           const val = column[row];
           return val + ' '.repeat(columnWidths[columnNumber] - val.length);
         })
-        .join(' ');
+        .join('  ');
     })
     .join('\n');
 }
