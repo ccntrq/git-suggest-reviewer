@@ -1,3 +1,5 @@
+import {bugsUrl} from './package';
+
 export class GitCmdError extends Error {}
 
 export function isGitCmdError(error: unknown): error is GitCmdError {
@@ -13,8 +15,7 @@ export class UnexpectedError extends Error {
   }
 
   newIssueUrl(): string {
-    let url =
-      'https://github.com/ccntrq/git-suggest-reviewer/issues/new?title=';
+    let url = `${bugsUrl}/new?title=`;
 
     url += encodeURIComponent('Unexpected Error occured');
     url += '&body=';
