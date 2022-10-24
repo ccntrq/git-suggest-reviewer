@@ -20,6 +20,16 @@ export function cli(): void {
   process.exit(0);
 }
 
+export function renderTopReviewerTable(
+  topReviewers: Array<ReviewerStats>
+): string {
+  return renderTable(
+    topReviewers.slice(0, 9),
+    ['author', 'changedLines', 'lastCommitDate'],
+    ['Author', 'Changed Lines', 'Last Commit Date']
+  );
+}
+
 interface CliOptions {
   baseRevision: string;
 }
@@ -36,14 +46,6 @@ function parseArgs(args: Array<string>): undefined | CliOptions {
   return {
     baseRevision: args[2],
   };
-}
-
-function renderTopReviewerTable(topReviewers: Array<ReviewerStats>): string {
-  return renderTable(
-    topReviewers.slice(0, 9),
-    ['author', 'changedLines', 'lastCommitDate'],
-    ['Author', 'Changed Lines', 'Last Commit Date']
-  );
 }
 
 function renderTable<T extends object>(
