@@ -1,4 +1,4 @@
-import {gitSuggestReviewer} from './core';
+import {gitSuggestReviewer, ReviewerStats} from './core';
 import {GitCmdError} from './error';
 
 export function cli(): void {
@@ -10,15 +10,11 @@ export function cli(): void {
     process.exit(1);
   }
 
-  const summary = handleAppErrors(() => gitSuggestReviewer(opts.baseRevision));
-
-  console.log(
-    renderTable(summary.slice(0, 9), [
-      'author',
-      'changedLines',
-      'lastCommitDate',
-    ])
+  const topReviewers = handleAppErrors(() =>
+    gitSuggestReviewer(opts.baseRevision)
   );
+
+  console.log(renderTopReviewerTable(topReviewers.slice(0, 9)));
 
   // eslint-disable-next-line no-process-exit
   process.exit(0);
@@ -40,6 +36,14 @@ function parseArgs(args: Array<string>): undefined | CliOptions {
   return {
     baseRevision: args[2],
   };
+}
+
+function renderTopReviewerTable(topReviewers: Array<ReviewerStats>): string {
+  return renderTable(topReviewers.slice(0, 9), [
+    'author',
+    'changedLines',
+    'lastCommitDate',
+  ]);
 }
 
 function renderTable<T extends object>(
