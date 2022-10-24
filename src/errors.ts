@@ -1,4 +1,4 @@
-import {bugsUrl} from './package';
+import {bugsUrl, version} from './package';
 
 export class GitCmdError extends Error {}
 
@@ -19,7 +19,7 @@ export class UnexpectedError extends Error {
 
     url += encodeURIComponent('Unexpected Error occured');
     url += '&body=';
-    url += encodeURIComponent(this.originalError);
+    url += encodeURIComponent(this.originalError + '\n\nVersion: ' + version);
 
     return url;
   }
