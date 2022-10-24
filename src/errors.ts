@@ -7,11 +7,11 @@ export function isGitCmdError(error: unknown): error is GitCmdError {
 }
 
 export class UnexpectedError extends Error {
-  public readonly originalError: string;
   constructor(error: unknown) {
-    super('An unexpected error occured');
-    this.originalError =
-      error instanceof Error && error.stack ? error.stack : `${error}`;
+    super(
+      'An unexpected error occured:\n' +
+        (error instanceof Error && error.stack ? error.stack : `${error}`)
+    );
   }
 
   newIssueUrl(): string {
@@ -19,7 +19,7 @@ export class UnexpectedError extends Error {
 
     url += encodeURIComponent('Unexpected Error occured');
     url += '&body=';
-    url += encodeURIComponent(this.originalError + '\n\nVersion: ' + version);
+    url += encodeURIComponent(this.message + '\n\nVersion: ' + version);
 
     return url;
   }
