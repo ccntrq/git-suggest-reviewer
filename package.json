@@ -9,7 +9,7 @@
     "email": "ccntrq@screenri.de"
   },
   "scripts": {
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node dist/git-suggest-reviewer.js",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "clean": "gts clean",
@@ -17,9 +17,9 @@
     "fix": "gts fix",
     "prepublish": "npm run clean && npm run build"
   },
-  "bin": "dist/index.js",
-  "main": "dist/core.js",
-  "types": "dist/core.d.ts",
+  "bin": "dist/git-suggest-reviewer.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@types/node": "^14.11.2",
     "gts": "^3.1.1",

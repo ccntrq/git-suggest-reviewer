@@ -1,4 +1,3 @@
 #!/usr/bin/env node
-import {cli} from './cli';
 
-cli();
+export * from './core';
