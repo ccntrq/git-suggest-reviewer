@@ -9,6 +9,21 @@ export interface ReviewerStats {
   lastCommitDate: string;
 }
 
+/**
+ * Suggests possible reviewers based on the previous authors of changed lines
+ * since `baseRevision`.
+ *
+ * @param baseRevision
+ * @returns Array of {@link ReviewerStats}, sorted by the amount of changed
+ * lines  per author in descending order.
+ *
+ * @throws {@link GitCmdError}
+ * This exception is thrown in when any of the git operations fail
+ *
+ * @throws {@link UnexpectedError}
+ * This exception is thrown on unknown/unhandled errors. This is considered a
+ * bug.
+ */
 export function gitSuggestReviewer(baseRevision: string): Array<ReviewerStats> {
   try {
     return gitSuggestReviewerUnsafe(baseRevision);

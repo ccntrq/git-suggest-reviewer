@@ -49,6 +49,12 @@ Options:
   return usage;
 }
 
+/**
+ * Creates a nicely formatted table from the given {@link ReviewerStats} for
+ * printing on a terminal or other devices.
+ *
+ * @param topReviewers
+ */
 export function renderTopReviewerTable(
   topReviewers: Array<ReviewerStats>
 ): string {
