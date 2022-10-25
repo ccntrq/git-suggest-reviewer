@@ -1,7 +1,0 @@
-.github/
-src/
-doc/
-.editorconfig
-.eslint*
-.prettierrc.js
-tsconfig.json
