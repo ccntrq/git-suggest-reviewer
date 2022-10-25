@@ -15,10 +15,10 @@ changed lines of each previous author.
 ~/Code/sample-project$ git suggest-reviewer 1.7.13
 
 Author         Changed Lines  Last Commit Date
-Peter Pan      87             2022-08-19 15:00:06 +0000
-Captain Hook   62             2022-09-19 10:07:58 +0000
-Wendy Darling  12             2022-02-10 11:12:32 +0000
-Tinker Bell    8              2021-09-15 13:09:26 +0000
+Peter Pan      87             2022-08-19
+Captain Hook   62             2022-09-19
+Wendy Darling  12             2022-02-10
+Tinker Bell    8              2021-09-15
 ```
 
 ## Install
