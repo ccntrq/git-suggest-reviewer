@@ -1,4 +1,6 @@
+.github/
 src/
+doc/
 .editorconfig
 .eslint*
 .prettierrc.js
