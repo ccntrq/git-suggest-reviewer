@@ -6,7 +6,7 @@ export interface ReviewerStats {
   author: string;
   changedLines: number;
   lastCommitId: string;
-  lastCommitDate: string;
+  lastCommitDate: Date;
 }
 
 /**
@@ -60,7 +60,7 @@ type DiffBlameInfo = Map<FilePath, Array<BlameInfo>>;
 interface BlameInfo {
   author: string;
   commitId: string;
-  commitDate: string;
+  commitDate: Date;
 }
 
 interface Range {
@@ -77,8 +77,7 @@ function summarizeBlameInfos(
     const current = map.get(blameInfo.author);
     if (current) {
       current.changedLines += 1;
-      // NOTE: needs proper date handling!
-      if (blameInfo.commitDate > current.lastCommitDate) {
+      if (compareDates(blameInfo.commitDate, current.lastCommitDate) > 0) {
         current.lastCommitDate = blameInfo.commitDate;
         current.lastCommitId = blameInfo.commitId;
       }
@@ -188,6 +187,10 @@ function parseBlameLine(blame: string): BlameInfo {
   return {
     author: match[2],
     commitId: match[1],
-    commitDate: match[3],
+    commitDate: new Date(match[3]),
   };
+}
+
+function compareDates(a: Date, b: Date) {
+  return a.getTime() - b.getTime();
 }

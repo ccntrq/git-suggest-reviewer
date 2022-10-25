@@ -59,7 +59,9 @@ export function renderTopReviewerTable(
   topReviewers: Array<ReviewerStats>
 ): string {
   return renderTable(
-    topReviewers.slice(0, 9),
+    topReviewers.slice(0, 9).map(r => {
+      return {...r, lastCommitDate: toISODateString(r.lastCommitDate)};
+    }),
     ['author', 'changedLines', 'lastCommitDate'],
     ['Author', 'Changed Lines', 'Last Commit Date']
   );
@@ -133,6 +135,10 @@ function renderTable<T extends object>(
         .join('  ');
     })
     .join('\n');
+}
+
+function toISODateString(date: Date): string {
+  return date.toISOString().split('T')[0];
 }
 
 function handleAppErrors<T>(action: () => T): T {
