@@ -9,6 +9,15 @@
     "email": "ccntrq@screenri.de"
   },
   "bugs": "https://github.com/ccntrq/git-suggest-reviewer/issues",
+  "keywords": [
+    "cli",
+    "code review",
+    "code-review",
+    "git",
+    "pull request",
+    "pull-request",
+    "review"
+  ],
   "scripts": {
     "start": "npm run build && node dist/git-suggest-reviewer.js",
     "build": "tsc",
