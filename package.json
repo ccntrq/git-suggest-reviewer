@@ -32,7 +32,9 @@
     "doc": "typedoc src/index.ts",
     "prepublish": "npm run clean && npm run build"
   },
-  "bin": "dist/git-suggest-reviewer.js",
+  "bin": {
+    "git-suggest-reviewer": "dist/cli.js"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

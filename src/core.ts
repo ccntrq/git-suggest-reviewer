@@ -1,13 +1,7 @@
 import {GitCmdError, UnexpectedError} from './errors';
 import {gitDiff, gitBlame} from './git-cmds';
+import type {ReviewerStats, SuggestedReviewers} from './reviewer-stats';
 import {lines} from './utils';
-
-export interface ReviewerStats {
-  author: string;
-  changedLines: number;
-  lastCommitId: string;
-  lastCommitDate: Date;
-}
 
 /**
  * Suggests possible reviewers based on the previous authors of changed lines
@@ -24,7 +18,7 @@ export interface ReviewerStats {
  * This exception is thrown on unknown/unhandled errors. This is considered a
  * bug.
  */
-export function gitSuggestReviewer(baseRevision: string): Array<ReviewerStats> {
+export function gitSuggestReviewer(baseRevision: string): SuggestedReviewers {
   try {
     return gitSuggestReviewerUnsafe(baseRevision);
   } catch (error: unknown) {
@@ -41,7 +35,7 @@ export function gitSuggestReviewer(baseRevision: string): Array<ReviewerStats> {
   }
 }
 
-function gitSuggestReviewerUnsafe(baseRevision: string): Array<ReviewerStats> {
+function gitSuggestReviewerUnsafe(baseRevision: string): SuggestedReviewers {
   const diff = gitDiff(baseRevision);
   const diffChanges = getDiffChanges(diff);
   const diffBlames = collectBlames(baseRevision, diffChanges);
@@ -68,9 +62,7 @@ interface Range {
   linesChanged: number;
 }
 
-function summarizeBlameInfos(
-  blameInfos: Array<BlameInfo>
-): Array<ReviewerStats> {
+function summarizeBlameInfos(blameInfos: Array<BlameInfo>): SuggestedReviewers {
   const map = new Map<string, ReviewerStats>();
 
   blameInfos.forEach(blameInfo => {
