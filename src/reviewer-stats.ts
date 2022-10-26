@@ -19,7 +19,7 @@ export function renderTopReviewerTable(
   suggestedReviewers: SuggestedReviewers
 ): string {
   return renderTable(
-    suggestedReviewers.slice(0, 9).map(r => {
+    suggestedReviewers.slice(0, 10).map(r => {
       return {...r, lastCommitDate: toISODateString(r.lastCommitDate)};
     }),
     ['author', 'changedLines', 'lastCommitDate'],
