@@ -5,8 +5,8 @@ import {GitCmdError, UnexpectedError} from './errors';
 
 jest.mock('./git-cmds');
 
-describe('sum module', () => {
-  test('adds 1 + 2 to equal 3', () => {
+describe('core', () => {
+  test('reviewer suggestions work', () => {
     const topReviewers = gitSuggestReviewer('HEAD');
     expect(topReviewers.length).toBe(2);
     expect(topReviewers[0]?.changedLines).toBe(12);
