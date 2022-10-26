@@ -53,20 +53,19 @@ You can also use this as a library inside of your TS/JS projects.
 ```ts
 import {gitSuggestReviewer, renderTopReviewerTable} from 'git-suggest-reviewer';
 
-(async () => {
-  const baseRevision = '1.7.13';
-  const topReviewer = await gitSuggestReviewer(baseRevision);
-  const formerColleagues = ['Captain Hook'];
-  const withoutFormerColleaguesAndAboveTenChangedLines = topReviewer.filter(
-    reviewer =>
-      !formerColleagues.includes(reviewer.author) && reviewer.changedLines > 10
-  );
+const baseRevision = '1.7.13';
+const topReviewer = await gitSuggestReviewer(baseRevision);
+const formerColleagues = ['Captain Hook'];
+const withoutFormerColleaguesAndAboveTenChangedLines = topReviewer.filter(
+  reviewer =>
+    !formerColleagues.includes(reviewer.author) && reviewer.changedLines > 10
+);
 
-  console.log(
-    renderTopReviewerTable(withoutFormerColleaguesAndAboveTenChangedLines)
-  );
-})();
+console.log(
+  renderTopReviewerTable(withoutFormerColleaguesAndAboveTenChangedLines)
+);
 ```
+
 ## Documentation
 
 You can find documentation for the public interface [here](https://ccntrq.github.io/git-suggest-reviewer/)
