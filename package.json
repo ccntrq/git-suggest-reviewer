@@ -9,6 +9,9 @@
     "email": "ccntrq@screenri.de"
   },
   "bugs": "https://github.com/ccntrq/git-suggest-reviewer/issues",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "keywords": [
     "cli",
     "code review",
