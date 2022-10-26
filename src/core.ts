@@ -154,7 +154,7 @@ function getDiffChanges(diff: string): DiffChanges {
     }
 
     const rangeLine = line.match(/^@@\s-(\d+)(?:,(\d+))?\s\+\d+,\d+\s@@/);
-    if (rangeLine) {
+    if (rangeLine && rangeLine[1] && rangeLine[2]) {
       const range = {
         startLine: parseInt(rangeLine[1]),
         linesChanged: rangeLine[2] ? parseInt(rangeLine[2]) : 1,
@@ -180,7 +180,7 @@ function parseBlameLine(blame: string): BlameInfo {
     /^(\S+)(?:\s\S+)?\s+\((.*?)\s+(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s\+\d{4})/
   );
 
-  if (!match) {
+  if (!(match && match[1] && match[2] && match[3])) {
     throw new Error("Couldn't parse blame: " + blame);
   }
 

@@ -125,12 +125,12 @@ function renderTable<T extends object>(
     Math.max(...column.map(entry => entry.length))
   );
 
-  return columns[0]
+  return (columns[0] ?? [])
     .map((_, row) => {
       return columns
         .map((column, columnNumber) => {
-          const val = column[row];
-          return val + ' '.repeat(columnWidths[columnNumber] - val.length);
+          const val = column[row]!;
+          return val + ' '.repeat(columnWidths[columnNumber]! - val.length);
         })
         .join('  ');
     })
@@ -138,7 +138,7 @@ function renderTable<T extends object>(
 }
 
 function toISODateString(date: Date): string {
-  return date.toISOString().split('T')[0];
+  return date.toISOString().slice(0, 9);
 }
 
 function handleAppErrors<T>(action: () => T): T {
