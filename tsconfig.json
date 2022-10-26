@@ -1,14 +1,12 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
+  "extends": "./node_modules/@tsconfig/node18-strictest/tsconfig.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "lib": [
-      "es2019"
-    ]
+    "target": "ES2020",
   },
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
-  ]
+  ],
 }
