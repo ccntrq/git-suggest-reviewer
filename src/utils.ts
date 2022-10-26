@@ -3,5 +3,5 @@ export function lines(s: string): Array<string> {
 }
 
 export function toISODateString(date: Date): string {
-  return date.toISOString().slice(0, 9);
+  return date.toISOString().slice(0, 10);
 }
