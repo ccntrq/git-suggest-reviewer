@@ -32,7 +32,7 @@ export function cli(): void {
   process.exit(0);
 }
 
-export function usage() {
+export function usage(): string {
   const usage = `git-suggest-reviewers
 
 Suggest candidates for a code review based on git history.
@@ -109,7 +109,7 @@ function parseArgs(args: Array<string>): undefined | CliOptions {
   return options;
 }
 
-function renderTable<T extends object>(
+function renderTable<T extends Record<string, unknown>>(
   values: Array<T>,
   accessors: Array<keyof T>,
   headings?: Array<string>
@@ -129,8 +129,10 @@ function renderTable<T extends object>(
     .map((_, row) => {
       return columns
         .map((column, columnNumber) => {
-          const val = column[row]!;
-          return val + ' '.repeat(columnWidths[columnNumber]! - val.length);
+          const val = column[row] ?? '';
+          return (
+            val + ' '.repeat((columnWidths[columnNumber] ?? 0) - val.length)
+          );
         })
         .join('  ');
     })

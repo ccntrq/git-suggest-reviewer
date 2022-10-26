@@ -191,6 +191,6 @@ function parseBlameLine(blame: string): BlameInfo {
   };
 }
 
-function compareDates(a: Date, b: Date) {
+function compareDates(a: Date, b: Date): number {
   return a.getTime() - b.getTime();
 }
