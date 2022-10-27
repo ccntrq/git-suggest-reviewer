@@ -1,3 +1,3 @@
 export * from './core';
 export * from './errors';
-export {renderTopReviewerTable} from './reviewer-stats';
+export {ReviewerStats, renderTopReviewerTable} from './reviewer-stats';
