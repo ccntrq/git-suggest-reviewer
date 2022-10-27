@@ -30,7 +30,7 @@
     "fix": "eslint . --fix",
     "test": "npm run build && jest",
     "doc": "typedoc src/index.ts",
-    "prepublish": "npm run clean && npm run build"
+    "prepare": "npm run clean && npm run build"
   },
   "bin": {
     "git-suggest-reviewer": "dist/cli.js"
