@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`e2e test git-suggest-reviewer prints usage to stderr and sets exitcode to 1 with no arguments 1`] = `
+"git-suggest-reviewers
+
+Suggest candidates for a code review based on git history.
+
+USAGE:
+  git-suggest-reviewers [OPTIONS]
+  git-suggest-reviewers [OPTIONS] base_revision
+
+Options:
+    -h --help       Show this help
+    -v --version    Print program version
+    --verbose       Be more verbose
+
+"
+`;
+
+exports[`e2e test git-suggest-reviewer prints usage with --help 1`] = `
+"git-suggest-reviewers
+
+Suggest candidates for a code review based on git history.
+
+USAGE:
+  git-suggest-reviewers [OPTIONS]
+  git-suggest-reviewers [OPTIONS] base_revision
+
+Options:
+    -h --help       Show this help
+    -v --version    Print program version
+    --verbose       Be more verbose
+
+"
+`;
