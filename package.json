@@ -22,7 +22,7 @@
     "review"
   ],
   "scripts": {
-    "start": "npm run build && node dist/git-suggest-reviewer.js",
+    "start": "npm run build && node dist/cli.js",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "clean": "rimraf dist/ docs/",
