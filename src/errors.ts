@@ -3,7 +3,16 @@ import {bugsUrl, version} from './package';
 /**
  * An error of this class will be thrown if any of the git operations fail.
  */
-export class GitCmdError extends Error {}
+export class GitCmdError extends Error {
+  /**
+   *
+   * @param message Error message describing the git failure
+   * @param originalError The original error that caused the failure
+   */
+  constructor(message: string, public readonly originalError: Error) {
+    super(message);
+  }
+}
 
 /**
  * Typeguard to check if an unknown error is an instance of  {@link GitCmdError | `GitCmdError`}.

@@ -27,6 +27,9 @@ function runGitCmd(cmd: SupportedGitCmd, opts: Array<string>): string {
     const result = execSync(fullCmd);
     return result.toString();
   } catch (error: unknown) {
-    throw new GitCmdError(`Couldn't execute git command: '${fullCmd}'`);
+    throw new GitCmdError(
+      `Couldn't execute git command: '${fullCmd}'`,
+      error instanceof Error ? error : new Error(`${error}`)
+    );
   }
 }

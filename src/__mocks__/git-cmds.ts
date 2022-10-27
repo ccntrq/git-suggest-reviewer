@@ -26,7 +26,7 @@ export function gitBlame(
 
 export function gitDiff(baseRevision: string): string {
   if (baseRevision === 'invalid') {
-    throw new GitCmdError('invalid');
+    throw new GitCmdError('invalid', new Error('orig'));
   }
   if (baseRevision === 'error') {
     throw new Error('error');
