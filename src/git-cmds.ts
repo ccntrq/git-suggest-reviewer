@@ -1,4 +1,4 @@
-import {execSync} from 'child_process';
+import {spawnSync} from 'child_process';
 import {GitCmdError} from './errors';
 
 type SupportedGitCmd = 'diff' | 'blame';
@@ -21,15 +21,15 @@ export function gitDiff(baseRevision: string): string {
 }
 
 function runGitCmd(cmd: SupportedGitCmd, opts: Array<string>): string {
-  const fullCmd = ['git', cmd, ...opts].join(' ');
+  const args = [cmd, ...opts];
 
-  try {
-    const result = execSync(fullCmd);
-    return result.toString();
-  } catch (error: unknown) {
+  const result = spawnSync('git', args, {encoding: 'utf-8'});
+  if (result.error || result.stderr) {
     throw new GitCmdError(
-      `Couldn't execute git command: '${fullCmd}'`,
-      error instanceof Error ? error : new Error(`${error}`)
+      `Couldn't execute git command: 'git ${args.join(' ')}'`,
+      result.error ?? result.stderr
     );
   }
+
+  return result.stdout;
 }

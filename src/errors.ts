@@ -9,7 +9,7 @@ export class GitCmdError extends Error {
    * @param message Error message describing the git failure
    * @param originalError The original error that caused the failure
    */
-  constructor(message: string, public readonly originalError: Error) {
+  constructor(message: string, public readonly originalError: Error | string) {
     super(message);
   }
 }

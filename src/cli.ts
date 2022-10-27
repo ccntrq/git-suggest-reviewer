@@ -111,13 +111,15 @@ function handleAppErrors<T>(action: () => T, verbose: boolean): T {
   } catch (error: unknown) {
     if (isGitCmdError(error)) {
       console.error(error.message);
-      if (verbose && error.originalError) {
+      if (verbose) {
         console.error('OriginalError:');
         console.error(
           unlines(
-            lines(error.originalError.stack ?? `${error.originalError}`).map(
-              line => `  ${line}`
-            )
+            lines(
+              (error.originalError instanceof Error &&
+                error.originalError.stack) ||
+                `${error.originalError}`
+            ).map(line => `  ${line}`)
           )
         );
       }

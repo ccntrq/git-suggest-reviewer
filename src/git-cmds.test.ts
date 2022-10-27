@@ -7,7 +7,10 @@ jest.mock('child_process');
 
 describe('git-cmds', () => {
   beforeEach(() => {
-    require('child_process').__setMockThrow(false);
+    require('child_process').__setMockOpts({
+      mockThrow: '',
+      mockError: '',
+    });
   });
   test('gitBlame', () => {
     const result = gitBlame('HEAD', 'index.ts', 1, 5);
@@ -17,9 +20,33 @@ describe('git-cmds', () => {
     const result = gitDiff('HEAD');
     expect(result).toBe('git diff HEAD');
   });
-  test('catches childprocess errors', () => {
-    require('child_process').__setMockThrow(true);
+  test('handles spawn errors', () => {
+    require('child_process').__setMockOpts({mockThrow: 'Throw'});
 
-    expect(() => gitBlame('HEAD', 'index.ts', 1, 5)).toThrow(GitCmdError);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let error: any;
+    try {
+      gitBlame('HEAD', 'index.ts', 1, 5);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).toBeInstanceOf(GitCmdError);
+    expect(error.originalError).toBeInstanceOf(Error);
+    expect(`${error.originalError}`).toBe('Error: Throw');
+  });
+  test('handles stderr', () => {
+    require('child_process').__setMockOpts({mockError: 'Failed'});
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let error: any;
+    try {
+      gitBlame('HEAD', 'index.ts', 1, 5);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).toBeInstanceOf(GitCmdError);
+    expect(error.originalError).toBe('Failed');
   });
 });
