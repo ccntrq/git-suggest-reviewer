@@ -28,7 +28,8 @@
     "clean": "rimraf dist/ docs/",
     "lint": "eslint .",
     "fix": "eslint . --fix",
-    "test": "npm run build && jest",
+    "pretest": "npm run build",
+    "test": "jest",
     "doc": "typedoc src/index.ts",
     "prepare": "npm run clean && npm run build"
   },
