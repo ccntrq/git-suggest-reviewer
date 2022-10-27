@@ -1,6 +1,7 @@
 import {describe, expect, test} from '@jest/globals';
-import {renderTopReviewerTable, SuggestedReviewers} from './reviewer-stats';
-import {lines} from './utils';
+import {renderTopReviewerTable} from '../src';
+import type {SuggestedReviewers} from '../src/reviewer-stats';
+import {lines} from '../src/utils';
 
 describe('reviewer-stats', () => {
   test('renderTopReviewerTable works', () => {

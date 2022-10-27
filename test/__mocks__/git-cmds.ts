@@ -1,4 +1,4 @@
-import {GitCmdError} from '../errors';
+import {GitCmdError} from '../../src/errors';
 
 export function gitBlame(
   _baseRevision: string,

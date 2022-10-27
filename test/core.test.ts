@@ -1,9 +1,7 @@
 import {describe, expect, jest, test} from '@jest/globals';
+import {gitSuggestReviewer, GitCmdError, UnexpectedError} from '../src';
 
-import {gitSuggestReviewer} from './core';
-import {GitCmdError, UnexpectedError} from './errors';
-
-jest.mock('./git-cmds');
+jest.mock('../src/git-cmds', () => require('./__mocks__/git-cmds'));
 
 describe('core', () => {
   test('reviewer suggestions work', () => {

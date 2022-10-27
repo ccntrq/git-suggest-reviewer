@@ -1,7 +1,7 @@
 import {describe, expect, beforeEach, test, jest} from '@jest/globals';
-import {GitCmdError} from './errors';
 
-import {gitBlame, gitDiff} from './git-cmds';
+import {GitCmdError} from '../src/errors';
+import {gitBlame, gitDiff} from '../src/git-cmds';
 
 jest.mock('child_process');
 

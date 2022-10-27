@@ -1,6 +1,6 @@
 import {describe, expect, test} from '@jest/globals';
-import {UnexpectedError} from './errors';
-import {version} from './package';
+import {UnexpectedError} from '../src/errors';
+import {version} from '../src/package';
 
 describe('errors', () => {
   test('UnexpectedError newIssueUrl works', () => {

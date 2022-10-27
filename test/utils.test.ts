@@ -1,5 +1,5 @@
 import {describe, expect, test} from '@jest/globals';
-import {lines, toISODateString, unlines} from './utils';
+import {lines, toISODateString, unlines} from '../src/utils';
 
 describe('utils', () => {
   test('lines', () => {
