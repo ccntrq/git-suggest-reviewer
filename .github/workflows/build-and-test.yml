@@ -10,23 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Setup node cache
-        uses: actions/cache@v3
-        id: node-cache
-        with:
-          path: node_modules
-          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-      - name: Install dependencies unless cached
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: npm ci
-
+      - id: setup-node-and-npm
+        uses: ./.github/actions/setup-node-and-npm-dependencies
       - name: Lint
         run: npm run lint
 
@@ -39,22 +24,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - id: setup-node-and-npm
+        uses: ./.github/actions/setup-node-and-npm-dependencies
         with:
           node-version: ${{ matrix.version }}
-
-      - name: Setup node cache
-        uses: actions/cache@v3
-        id: node-cache
-        with:
-          path: node_modules
-          key: node-modules-${{ runner.os }}-node-${ runner.version}}${{ hashFiles('package-lock.json') }}
-
-      - name: Install dependencies unless cached
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: npm ci
-
+          runner-os: ${{ matrix.os }}
       - name: Run tests (Runs build before)
         run: npm run test
