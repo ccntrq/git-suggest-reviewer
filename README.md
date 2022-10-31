@@ -54,7 +54,7 @@ You can also use this as a library inside of your TS/JS projects.
 import {gitSuggestReviewer, renderTopReviewerTable} from 'git-suggest-reviewer';
 
 const baseRevision = '1.7.13';
-const topReviewer = await gitSuggestReviewer(baseRevision);
+const topReviewer = gitSuggestReviewer(baseRevision);
 const formerColleagues = ['Captain Hook'];
 const withoutFormerColleaguesAndAboveTenChangedLines = topReviewer.filter(
   reviewer =>
@@ -74,5 +74,5 @@ You can find documentation for the public interface [here](https://ccntrq.github
 
 This package runs on `node` and depends on an `git` executable to be available.
 
-- `node` '>=v14.0.0'
+- `node >=v14.0.0`
 - `git` executable on your `$PATH`
