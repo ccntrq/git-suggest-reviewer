@@ -1,0 +1,33 @@
+on:
+  push:
+    branches:
+      - master
+name: release-please
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          commmand: manifest
+      - id: checkout
+        uses: actions/checkout@v3
+        if: ${{ steps.release.outputs.release_created }}
+      - id: setup-node-and-npm
+        if: ${{ steps.release.outputs.release_created }}
+        uses: ./.github/actions/setup-node-and-npm-dependencies
+      - run: npm publish
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_DEPLOY_TOKEN}}
+
+      - name: Build docs
+        run: npm run doc
+        if: ${{ steps.release.outputs.release_created }}
+      - name: Deploy 🚀
+        if: ${{ steps.release.outputs.release_created }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs
