@@ -10,7 +10,7 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
-          commmand: manifest
+          command: manifest
       - id: checkout
         uses: actions/checkout@v3
         if: ${{ steps.release.outputs.release_created }}
