@@ -11,6 +11,7 @@ jobs:
         id: release
         with:
           command: manifest
+          default-branch: master
       - id: checkout
         uses: actions/checkout@v3
         if: ${{ steps.release.outputs.release_created }}
