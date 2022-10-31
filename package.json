@@ -1,6 +1,6 @@
 {
   "name": "git-suggest-reviewer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Suggest candidates for a code review based on git history",
   "license": "MIT",
   "repository": "ccntrq/git-suggest-reviewer",
