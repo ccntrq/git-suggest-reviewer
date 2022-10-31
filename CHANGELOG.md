@@ -7,6 +7,13 @@ This project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html). For commit guidelines see
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [1.0.2](https://github.com/ccntrq/git-suggest-reviewer/compare/v1.0.1...v1.0.2) (2022-10-31)
+
+
+### Miscellaneous Chores
+
+* release v1.0.2 (only ci changes) ([e238345](https://github.com/ccntrq/git-suggest-reviewer/commit/e23834580b47a010428831e95b1b5cad908e36b8))
+
 ## [1.0.1](https://github.com/ccntrq/git-suggest-reviewer/compare/v1.0.0...v1.0.1) (2022-10-31)
 
 
