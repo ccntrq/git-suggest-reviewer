@@ -12,6 +12,7 @@ jobs:
         with:
           command: manifest
           default-branch: master
+          token: ${{ secrets.RELEASE_TOKEN }}
       - id: checkout
         uses: actions/checkout@v3
         if: ${{ steps.release.outputs.release_created }}
