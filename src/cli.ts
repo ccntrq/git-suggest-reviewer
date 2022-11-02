@@ -34,7 +34,7 @@ function cli(): void {
     opts.verbose
   );
 
-  console.log(renderTopReviewerTable(topReviewers.slice(0, 9)));
+  console.log(renderTopReviewerTable(topReviewers));
 
   // eslint-disable-next-line no-process-exit
   process.exit(0);
