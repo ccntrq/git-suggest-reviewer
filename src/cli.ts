@@ -34,7 +34,7 @@ function cli(): void {
     opts.verbose
   );
 
-  console.log(renderTopReviewerTable(topReviewers));
+  console.log(renderTopReviewerTable(topReviewers, opts.showEmail));
 
   // eslint-disable-next-line no-process-exit
   process.exit(0);
@@ -50,9 +50,10 @@ USAGE:
   git-suggest-reviewers [OPTIONS] base_revision
 
 Options:
-    -h --help       Show this help
-    -v --version    Print program version
-    --verbose       Be more verbose
+    -h --help        Show this help
+    -v --version     Print program version
+    -e --show-email  Print program version
+    --verbose        Be more verbose
 `;
 
   return usage;
@@ -63,6 +64,7 @@ interface CliOptions {
   help: boolean;
   version: boolean;
   verbose: boolean;
+  showEmail: boolean;
 }
 
 function defaultCliOptions(): CliOptions {
@@ -70,6 +72,7 @@ function defaultCliOptions(): CliOptions {
     help: false,
     version: false,
     verbose: false,
+    showEmail: false,
   };
 }
 
@@ -91,6 +94,10 @@ function parseArgs(args: Array<string>): undefined | CliOptions {
         break;
       case '--verbose':
         options.verbose = true;
+        break;
+      case '-e':
+      case '--show-email':
+        options.showEmail = true;
         break;
       default:
         if (!arg.startsWith('-') && !options.baseRevision) {

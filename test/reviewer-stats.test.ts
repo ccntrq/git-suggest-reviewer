@@ -3,30 +3,30 @@ import {renderTopReviewerTable} from '../src';
 import type {SuggestedReviewers} from '../src/reviewer-stats';
 import {lines} from '../src/utils';
 
+const reviewers: SuggestedReviewers = [
+  {
+    author: 'Peter Pan',
+    authorEmail: 'peter@pan.de',
+    changedLines: 87,
+    lastCommitDate: new Date(Date.UTC(2022, 9, 23)),
+    lastCommitId: 'ed7432a',
+  },
+  {
+    author: 'Captain Hook',
+    authorEmail: 'captain@hook.de',
+    changedLines: 3,
+    lastCommitDate: new Date(Date.UTC(2022, 9, 23)),
+    lastCommitId: '1j4nn1d',
+  },
+];
+
 describe('reviewer-stats', () => {
   test('renderTopReviewerTable works', () => {
-    const reviewers: SuggestedReviewers = [
-      {
-        author: 'Peter Pan',
-        authorEmail: 'peter@pan.de',
-        changedLines: 87,
-        lastCommitDate: new Date(Date.UTC(2022, 9, 23)),
-        lastCommitId: 'ed7432a',
-      },
-      {
-        author: 'Captain Hook',
-        authorEmail: 'captain@hook.de',
-        changedLines: 3,
-        lastCommitDate: new Date(Date.UTC(2022, 9, 23)),
-        lastCommitId: '1j4nn1d',
-      },
-    ];
-
-    expect(renderTopReviewerTable(reviewers)).toBe(
-      `Author        Changed Lines  Last Commit Date
-Peter Pan     87             2022-10-23      
-Captain Hook  3              2022-10-23      `
-    );
+    expect(renderTopReviewerTable(reviewers)).toMatchSnapshot();
+  });
+  test('renderTopReviewerTable with showEmail works', () => {
+    const showEmail = true;
+    expect(renderTopReviewerTable(reviewers, showEmail)).toMatchSnapshot();
   });
   test('renderTopReviewerTable limits output to 10 reviewers', () => {
     const reviewers: SuggestedReviewers = [
