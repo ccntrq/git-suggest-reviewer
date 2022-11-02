@@ -2,6 +2,7 @@ import {toISODateString} from './utils';
 
 export interface ReviewerStats {
   author: string;
+  authorEmail: string;
   changedLines: number;
   lastCommitId: string;
   lastCommitDate: Date;

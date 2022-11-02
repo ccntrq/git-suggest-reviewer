@@ -14,7 +14,7 @@ describe('git-cmds', () => {
   });
   test('gitBlame', () => {
     const result = gitBlame('HEAD', 'index.ts', 1, 5);
-    expect(result).toBe('git blame HEAD index.ts -L1,+5');
+    expect(result).toBe('git blame HEAD index.ts -L1,+5 --line-porcelain');
   });
   test('gitDiff', () => {
     const result = gitDiff('HEAD');

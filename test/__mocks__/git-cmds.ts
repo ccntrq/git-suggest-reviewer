@@ -8,11 +8,44 @@ export function gitBlame(
 ): string {
   const gens = [
     (line: string) =>
-      `e732a1a5 (Captain Hook 2022-10-24 13:54:38 +0200   ${line})`,
+      `1313abee1bda1f19199e9f999b999e9119919191 ${line} ${line}
+author Captain Hook
+author-mail <captain@hook.de>
+author-time 1666793860
+author-tz +0200
+author Captain Hook
+author-mail <captain@hook.de>
+author-time 1666793860
+author-tz +0200
+summary Add sturrgg
+filename ${_file}
+	- stuff`,
     (line: string) =>
-      `e732a1a5 (Captain Hook 2022-10-23 15:05:50 +0200   ${line})`,
+      `1313abee1bda1f19199e9f999b999e9119919191 ${line} ${line}
+author Captain Hook
+author-mail <captain@hook.de>
+author-time 1666793860
+author-tz +0200
+author Captain Hook
+author-mail <captain@hook.de>
+author-time 1666793860
+author-tz +0200
+summary Add sturrgg
+filename ${_file}
+	- stuff`,
     (line: string) =>
-      `bd3261a5 (Peter Pan 2020-10-24 19:21:39 +0200   ${line})`,
+      `412f4b84ed2840a6312fdb45bf6f29834e36aba4 ${line} ${line}
+author Peter Pan
+author-mail <peter@pan.de>
+author-time 1666793860
+author-tz +0200
+commiter Peter Pan
+commiter-mail <peter@pan.de>
+commiter-time 1666793860
+commiter-tz +0200
+summary Add dependencies to README
+filename ${_file}
+	- \`git\` executable on your \`$PATH\``,
   ];
 
   const out = [];

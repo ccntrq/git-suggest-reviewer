@@ -9,6 +9,7 @@ describe('core', () => {
     expect(topReviewers.length).toBe(2);
     expect(topReviewers[0]?.changedLines).toBe(12);
     expect(topReviewers[0]?.author).toBe('Captain Hook');
+    expect(topReviewers[0]?.authorEmail).toBe('captain@hook.de');
     expect(topReviewers[1]?.changedLines).toBe(6);
     expect(topReviewers[1]?.author).toBe('Peter Pan');
   });
