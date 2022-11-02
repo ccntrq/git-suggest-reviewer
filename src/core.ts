@@ -67,7 +67,7 @@ function summarizeBlameInfos(blameInfos: Array<BlameInfo>): SuggestedReviewers {
   const map = new Map<string, ReviewerStats>();
 
   blameInfos.forEach(blameInfo => {
-    const current = map.get(blameInfo.author);
+    const current = map.get(blameInfo.authorEmail);
     if (current) {
       current.changedLines += 1;
       if (compareDates(blameInfo.commitDate, current.lastCommitDate) > 0) {
@@ -75,7 +75,7 @@ function summarizeBlameInfos(blameInfos: Array<BlameInfo>): SuggestedReviewers {
         current.lastCommitId = blameInfo.commitId;
       }
     } else {
-      map.set(blameInfo.author, {
+      map.set(blameInfo.authorEmail, {
         author: blameInfo.author,
         authorEmail: blameInfo.authorEmail,
         lastCommitId: blameInfo.commitId,

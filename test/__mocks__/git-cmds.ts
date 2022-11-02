@@ -22,7 +22,7 @@ filename ${_file}
 	- stuff`,
     (line: string) =>
       `1313abee1bda1f19199e9f999b999e9119919191 ${line} ${line}
-author Captain Hook
+author Kapitän Hook
 author-mail <captain@hook.de>
 author-time 1666793860
 author-tz +0200
