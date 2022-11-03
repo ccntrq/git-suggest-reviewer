@@ -53,6 +53,7 @@ type DiffBlameInfo = Map<FilePath, Array<BlameInfo>>;
 
 interface BlameInfo {
   author: string;
+  authorEmail: string;
   commitId: string;
   commitDate: Date;
 }
@@ -66,7 +67,7 @@ function summarizeBlameInfos(blameInfos: Array<BlameInfo>): SuggestedReviewers {
   const map = new Map<string, ReviewerStats>();
 
   blameInfos.forEach(blameInfo => {
-    const current = map.get(blameInfo.author);
+    const current = map.get(blameInfo.authorEmail);
     if (current) {
       current.changedLines += 1;
       if (compareDates(blameInfo.commitDate, current.lastCommitDate) > 0) {
@@ -74,8 +75,9 @@ function summarizeBlameInfos(blameInfos: Array<BlameInfo>): SuggestedReviewers {
         current.lastCommitId = blameInfo.commitId;
       }
     } else {
-      map.set(blameInfo.author, {
+      map.set(blameInfo.authorEmail, {
         author: blameInfo.author,
+        authorEmail: blameInfo.authorEmail,
         lastCommitId: blameInfo.commitId,
         lastCommitDate: blameInfo.commitDate,
         changedLines: 1,
@@ -93,12 +95,7 @@ function collectBlameInfo(diffBlames: DiffBlames): DiffBlameInfo {
 
   diffBlames.forEach((blames, file) => {
     const fileBlameInfo = blames.map(blame => {
-      return lines(blame)
-        .filter(Boolean) // remove empty lines
-        .map(line => {
-          return parseBlameLine(line);
-        })
-        .flat();
+      return parseBlame(blame);
     });
 
     blameInfo.set(file, fileBlameInfo.flat());
@@ -167,19 +164,39 @@ function getDiffChanges(diff: string): DiffChanges {
   return changes;
 }
 
-function parseBlameLine(blame: string): BlameInfo {
-  const match = blame.match(
-    /^(\S+)(?:\s\S+)?\s+\((.*?)\s+(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s\+\d{4})/
-  );
+function parseBlame(blame: string): Array<BlameInfo> {
+  const chunks = blame.split(/\n\t.*\n/);
 
-  if (!(match && match[1] && match[2] && match[3])) {
-    throw new Error("Couldn't parse blame: " + blame);
+  return chunks.filter(p => !!p.length).map(parseBlameChunk);
+}
+
+// NOTE:
+// Very brittle parsing. This will break if the output of git blame is not
+function parseBlameChunk(chunk: string): BlameInfo {
+  const getValue = (line: string): string => {
+    const value = line.split(' ').slice(1).join(' ');
+    if (!value) {
+      throw new Error(`getValue failed: '${line}'`);
+    }
+
+    return value;
+  };
+
+  const removeAngleBrackets = (withAngleBrackets: string): string => {
+    return withAngleBrackets.replace(/^<(.*)>$/, (_, m1) => m1);
+  };
+
+  const chunkLines = lines(chunk);
+  const commitId = chunkLines[0]?.split(' ')[0];
+  if (!(commitId && chunkLines[1] && chunkLines[2] && chunkLines[3])) {
+    throw new Error(`Cannot parse blame: ${chunk}`);
   }
 
   return {
-    author: match[2],
-    commitId: match[1],
-    commitDate: new Date(match[3]),
+    author: getValue(chunkLines[1]),
+    authorEmail: removeAngleBrackets(getValue(chunkLines[2])),
+    commitId: commitId,
+    commitDate: new Date(parseInt(getValue(chunkLines[3])) * 1000),
   };
 }
 

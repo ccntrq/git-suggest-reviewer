@@ -10,9 +10,10 @@ USAGE:
   git-suggest-reviewers [OPTIONS] base_revision
 
 Options:
-    -h --help       Show this help
-    -v --version    Print program version
-    --verbose       Be more verbose
+    -h --help        Show this help
+    -v --version     Print program version
+    -e --show-email  Print program version
+    --verbose        Be more verbose
 
 "
 `;
@@ -27,9 +28,10 @@ USAGE:
   git-suggest-reviewers [OPTIONS] base_revision
 
 Options:
-    -h --help       Show this help
-    -v --version    Print program version
-    --verbose       Be more verbose
+    -h --help        Show this help
+    -v --version     Print program version
+    -e --show-email  Print program version
+    --verbose        Be more verbose
 
 "
 `;

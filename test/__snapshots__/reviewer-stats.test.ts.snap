@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reviewer-stats renderTopReviewerTable with showEmail works 1`] = `
+"Author                          Changed Lines  Last Commit Date
+Peter Pan <peter@pan.de>        87             2022-10-23      
+Captain Hook <captain@hook.de>  3              2022-10-23      "
+`;
+
+exports[`reviewer-stats renderTopReviewerTable works 1`] = `
+"Author        Changed Lines  Last Commit Date
+Peter Pan     87             2022-10-23      
+Captain Hook  3              2022-10-23      "
+`;

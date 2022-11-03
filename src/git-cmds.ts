@@ -13,6 +13,7 @@ export function gitBlame(
     baseRevision,
     file,
     `-L${startLine},+${lineCount}`,
+    '--line-porcelain',
   ]);
 }
 
