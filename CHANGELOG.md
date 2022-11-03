@@ -7,6 +7,19 @@ This project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html). For commit guidelines see
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [2.0.0](https://github.com/ccntrq/git-suggest-reviewer/compare/v1.0.2...v2.0.0) (2022-11-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* Assume authors with same email are the same person
+
+### Features
+
+* Add authorEmail to ReviewerStats ([23821fc](https://github.com/ccntrq/git-suggest-reviewer/commit/23821fcfe6c49cec4a35487da49ef2c2f62a905a))
+* Add option to show the email of an author ([e2de943](https://github.com/ccntrq/git-suggest-reviewer/commit/e2de943c7a5c8770d22d981319446ffbacde1fa5))
+* Assume authors with same email are the same person ([a91b086](https://github.com/ccntrq/git-suggest-reviewer/commit/a91b086487a8b0447f8d7a2422e39793a1bfb9c3))
+
 ## [1.0.2](https://github.com/ccntrq/git-suggest-reviewer/compare/v1.0.1...v1.0.2) (2022-10-31)
 
 
