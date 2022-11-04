@@ -7,6 +7,13 @@ This project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html). For commit guidelines see
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [2.0.1](https://github.com/ccntrq/git-suggest-reviewer/compare/v2.0.0...v2.0.1) (2022-11-04)
+
+
+### Bug Fixes
+
+* **cli:** correct the description for `-e/--show-email` option ([6989e6d](https://github.com/ccntrq/git-suggest-reviewer/commit/6989e6df2decce5d230a56b3a1b1257b44552bff))
+
 ## [2.0.0](https://github.com/ccntrq/git-suggest-reviewer/compare/v1.0.2...v2.0.0) (2022-11-03)
 
 
