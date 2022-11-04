@@ -52,7 +52,7 @@ USAGE:
 Options:
     -h --help        Show this help
     -v --version     Print program version
-    -e --show-email  Print program version
+    -e --show-email  Show the authors email
     --verbose        Be more verbose
 `;
 
