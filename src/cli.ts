@@ -30,7 +30,7 @@ function cli(): void {
 
   const baseRevision = opts.baseRevision;
   const topReviewers = handleAppErrors(
-    () => gitSuggestReviewer(baseRevision),
+    () => gitSuggestReviewer(baseRevision, opts.toRevision),
     opts.verbose
   );
 
@@ -48,6 +48,7 @@ Suggest candidates for a code review based on git history.
 USAGE:
   git-suggest-reviewers [OPTIONS]
   git-suggest-reviewers [OPTIONS] base_revision
+  git-suggest-reviewers [OPTIONS] <commit> <commit>
 
 Options:
     -h --help        Show this help
@@ -61,6 +62,7 @@ Options:
 
 interface CliOptions {
   baseRevision?: string;
+  toRevision?: string;
   help: boolean;
   version: boolean;
   verbose: boolean;
@@ -102,6 +104,8 @@ function parseArgs(args: Array<string>): undefined | CliOptions {
       default:
         if (!arg.startsWith('-') && !options.baseRevision) {
           options.baseRevision = arg;
+        } else if (!arg.startsWith('-') && !options.toRevision) {
+          options.toRevision = arg;
         } else {
           console.warn('Invalid argument: ' + arg);
         }

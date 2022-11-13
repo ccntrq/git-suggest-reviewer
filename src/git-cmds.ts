@@ -17,8 +17,11 @@ export function gitBlame(
   ]);
 }
 
-export function gitDiff(baseRevision: string): string {
-  return runGitCmd('diff', [baseRevision]);
+export function gitDiff(baseRevision: string, toRevision?: string): string {
+  return runGitCmd(
+    'diff',
+    [baseRevision].concat(toRevision ? [toRevision] : [])
+  );
 }
 
 function runGitCmd(cmd: SupportedGitCmd, opts: Array<string>): string {

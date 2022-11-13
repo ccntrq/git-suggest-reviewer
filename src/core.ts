@@ -18,9 +18,12 @@ import {lines} from './utils';
  * This exception is thrown on unknown/unhandled errors. This is considered a
  * bug.
  */
-export function gitSuggestReviewer(baseRevision: string): SuggestedReviewers {
+export function gitSuggestReviewer(
+  baseRevision: string,
+  toRevision?: string
+): SuggestedReviewers {
   try {
-    return gitSuggestReviewerUnsafe(baseRevision);
+    return gitSuggestReviewerUnsafe(baseRevision, toRevision);
   } catch (error: unknown) {
     if (
       error instanceof Error &&
@@ -35,8 +38,11 @@ export function gitSuggestReviewer(baseRevision: string): SuggestedReviewers {
   }
 }
 
-function gitSuggestReviewerUnsafe(baseRevision: string): SuggestedReviewers {
-  const diff = gitDiff(baseRevision);
+function gitSuggestReviewerUnsafe(
+  baseRevision: string,
+  toRevision?: string
+): SuggestedReviewers {
+  const diff = gitDiff(baseRevision, toRevision);
   const diffChanges = getDiffChanges(diff);
   const diffBlames = collectBlames(baseRevision, diffChanges);
   const diffBlameInfo = collectBlameInfo(diffBlames);
