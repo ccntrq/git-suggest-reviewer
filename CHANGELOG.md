@@ -7,6 +7,13 @@ This project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html). For commit guidelines see
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [2.1.0](https://github.com/ccntrq/git-suggest-reviewer/compare/v2.0.1...v2.1.0) (2022-11-13)
+
+
+### Features
+
+* Add possibility to pass in additional _to_ commit ([6a288b0](https://github.com/ccntrq/git-suggest-reviewer/commit/6a288b0d9f69ca461122d56b923d07c73275e0c5))
+
 ## [2.0.1](https://github.com/ccntrq/git-suggest-reviewer/compare/v2.0.0...v2.0.1) (2022-11-04)
 
 
