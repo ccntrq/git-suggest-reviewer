@@ -44,7 +44,7 @@ Suggest candidates for a code review based on git history.
 
 USAGE:
   git-suggest-reviewers [OPTIONS]
-  git-suggest-reviewers [OPTIONS] base_revision
+  git-suggest-reviewers [OPTIONS] <commit>
   git-suggest-reviewers [OPTIONS] <commit> <commit>
 
 Options:
