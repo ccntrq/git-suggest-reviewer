@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-process-exit */
 import {gitSuggestReviewer} from './core';
 import {isGitCmdError, isUnexpectedError, UnexpectedError} from './errors';
 import {version} from './package';
@@ -12,19 +13,16 @@ function cli(): void {
 
   if (opts?.help) {
     console.log(usage());
-    // eslint-disable-next-line no-process-exit
     process.exit(0);
   }
 
   if (opts?.version) {
     console.log(version);
-    // eslint-disable-next-line no-process-exit
     process.exit(0);
   }
 
   if (!opts || !opts.baseRevision) {
     console.error(usage());
-    // eslint-disable-next-line no-process-exit
     process.exit(1);
   }
 
@@ -36,7 +34,6 @@ function cli(): void {
 
   console.log(renderTopReviewerTable(topReviewers, opts.showEmail));
 
-  // eslint-disable-next-line no-process-exit
   process.exit(0);
 }
 
@@ -134,7 +131,6 @@ function handleAppErrors<T>(action: () => T, verbose: boolean): T {
           )
         );
       }
-      // eslint-disable-next-line no-process-exit
       process.exit(2);
     }
 
@@ -145,7 +141,6 @@ function handleAppErrors<T>(action: () => T, verbose: boolean): T {
           : new UnexpectedError(error)
         ).newIssueUrl()
     );
-    // eslint-disable-next-line no-process-exit
     process.exit(3);
   }
 }
