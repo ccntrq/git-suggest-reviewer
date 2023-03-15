@@ -5,8 +5,16 @@ updates:
     # Look for `package.json` and `lock` files in the `root` directory
     directory: "/"
     versioning-strategy: increase
-    # Check the npm registry for updates every day (weekdays)
+    # Check the npm registry for updates every week
+    schedule:     
+      interval: "weekly"
+      time: "12:00"
+      timezone: "Europe/Berlin"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
-      interval: "daily"
+      # Check for updates to GitHub Actions every week
+      interval: "weekly"
       time: "12:00"
       timezone: "Europe/Berlin"
