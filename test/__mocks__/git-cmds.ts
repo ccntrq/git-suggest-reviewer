@@ -48,7 +48,7 @@ filename ${_file}
 	- \`git\` executable on your \`$PATH\``,
   ];
 
-  const out = [];
+  const out: string[] = [];
   for (let i = 0; i < lineCount; i++) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     out.push(gens[i % gens.length]!(i.toString()));

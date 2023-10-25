@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`e2e test git-suggest-reviewer prints usage to stderr and sets exitcode to 1 with no arguments 1`] = `
+exports[`e2e test git-suggest-reviewer > prints usage to stderr and sets exitcode to 1 with no arguments 1`] = `
 "git-suggest-reviewers
 
 Suggest candidates for a code review based on git history.
@@ -19,7 +19,7 @@ Options:
 "
 `;
 
-exports[`e2e test git-suggest-reviewer prints usage with --help 1`] = `
+exports[`e2e test git-suggest-reviewer > prints usage with --help 1`] = `
 "git-suggest-reviewers
 
 Suggest candidates for a code review based on git history.

@@ -1,4 +1,4 @@
-import {describe, expect, test} from '@jest/globals';
+import {describe, expect, test} from 'vitest';
 import {UnexpectedError} from '../src/errors';
 import {version} from '../src/package';
 
