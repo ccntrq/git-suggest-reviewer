@@ -74,5 +74,5 @@ You can find documentation for the public interface [here](https://ccntrq.github
 
 This package runs on `node` and depends on an `git` executable to be available.
 
-- `node >=v14.0.0`
+- `node >=v16.0.0`
 - `git` executable on your `$PATH`

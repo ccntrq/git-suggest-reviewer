@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - id: setup-node-and-npm
         uses: ./.github/actions/setup-node-and-npm-dependencies
       - name: Lint
@@ -22,11 +22,11 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        version: [14, 16, 18]
+        version: [16, 18, 20]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - id: setup-node-and-npm
         uses: ./.github/actions/setup-node-and-npm-dependencies
         with:
