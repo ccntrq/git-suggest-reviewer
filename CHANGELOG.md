@@ -7,6 +7,21 @@ This project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html). For commit guidelines see
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## [3.0.0](https://github.com/ccntrq/git-suggest-reviewer/compare/v2.1.0...v3.0.0) (2023-10-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* node 14 not supported anymore
+    - Bump version for @types/node
+    - Add volta section to package.json and pin node to v20
+    - remove .nvmrc
+
+### Features
+
+* Bump minimum node version to 16 and add node 20 to build matrix ([0f59e6a](https://github.com/ccntrq/git-suggest-reviewer/commit/0f59e6af2e6712701f5a454901a3e10d82ed5f12))
+* Export SuggestedReviewers type ([8dab435](https://github.com/ccntrq/git-suggest-reviewer/commit/8dab435748935487a276b3d8613fe955cd8fac21))
+
 ## [2.1.0](https://github.com/ccntrq/git-suggest-reviewer/compare/v2.0.1...v2.1.0) (2022-11-13)
 
 
