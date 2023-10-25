@@ -12,7 +12,7 @@ jobs:
         with:
           command: manifest
           default-branch: master
-          token: ${{ secrets.RELEASE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - id: checkout
         uses: actions/checkout@v4
         if: ${{ steps.release.outputs.release_created }}
