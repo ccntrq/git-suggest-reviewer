@@ -1,4 +1,4 @@
-import {describe, expect, test} from '@jest/globals';
+import {describe, expect, test} from 'vitest';
 import {spawnSync} from 'child_process';
 
 describe('e2e test git-suggest-reviewer', () => {

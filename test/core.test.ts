@@ -1,7 +1,10 @@
-import {describe, expect, jest, test} from '@jest/globals';
+import {describe, expect, vi, test} from 'vitest';
 import {gitSuggestReviewer, GitCmdError, UnexpectedError} from '../src';
 
-jest.mock('../src/git-cmds', () => require('./__mocks__/git-cmds'));
+vi.mock('../src/git-cmds', async () => {
+  const mock = await import('./__mocks__/git-cmds');
+  return mock;
+});
 
 describe('core', () => {
   test('reviewer suggestions work', () => {

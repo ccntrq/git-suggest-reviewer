@@ -1,4 +1,4 @@
-import {describe, expect, test} from '@jest/globals';
+import {describe, expect, test} from 'vitest';
 import {renderTopReviewerTable} from '../src';
 import type {SuggestedReviewers} from '../src/reviewer-stats';
 import {lines} from '../src/utils';
