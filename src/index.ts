@@ -1,3 +1,7 @@
 export * from './core';
 export * from './errors';
-export {ReviewerStats, renderTopReviewerTable} from './reviewer-stats';
+export {
+  type ReviewerStats,
+  type SuggestedReviewers,
+  renderTopReviewerTable,
+} from './reviewer-stats';
