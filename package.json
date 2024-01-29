@@ -47,7 +47,7 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.2",
     "@tsconfig/strictest": "^2.0.2",
-    "@types/node": "^20.11.6",
+    "@types/node": "^20.11.10",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "@typescript-eslint/typescript-estree": "^6.13.1",
@@ -59,6 +59,6 @@
     "rimraf": "^5.0.5",
     "typedoc": "^0.25.7",
     "typescript": "~5.3.3",
-    "vitest": "^1.2.1"
+    "vitest": "^1.2.2"
   }
 }
